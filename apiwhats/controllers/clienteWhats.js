@@ -22,9 +22,12 @@ exports.iniciarCliente = (req, res) => {
     }),
     // proxyAuthentication: { username: 'username', password: 'password' },
     puppeteer: {
-      args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-extensions'],
+      // args: [
+      //   "--no-sandbox",
+      //   "--disable-setuid-sandbox",
+      //   "--disable-extensions",
+      // ],
       headless: false,
-
     },
   });
 
@@ -59,9 +62,9 @@ exports.iniciarCliente = (req, res) => {
     console.log("READY");
   });
 
-  cliente.on('loading_screen', (percent, message) => {
-    console.log('LOADING SCREEN', percent, message);
-});
+  cliente.on("loading_screen", (percent, message) => {
+    console.log("LOADING SCREEN", percent, message);
+  });
 };
 
 // Função para fechar um cliente
@@ -223,10 +226,9 @@ process.on("SIGINT", async () => {
   for (let idCliente in clientes) {
     const cliente = clientes[idCliente];
     if (cliente) {
-     await cliente.destroy().then(() => {
-        delete clientes[idCliente];
-        console.log(`Cliente ${idCliente} fechado.`);
-      });
+      cliente.destroy();
+      delete clientes[idCliente];
+      console.log(`Cliente ${idCliente} fechado.`);
     }
   }
   process.exit(0);

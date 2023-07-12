@@ -8,10 +8,7 @@ WORKDIR /app
 RUN apt-get update -y
 
 # Instalar dependências necessárias para o Google Chrome e Puppeteer
-RUN apt-get install -y \ 
-  xvfb \ 
-  xauth \
-  --no-install-recommends
+RUN apt-get install -y  xorg  --no-install-recommends
 
 # Adicionar a chave pública do Google para autenticação
 RUN curl -sSL https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /etc/apt/trusted.gpg.d/google.gpg
@@ -40,4 +37,4 @@ COPY . .
 EXPOSE 3000
 
 # Comando para iniciar o app
-CMD ["npm","start"]
+CMD ["node","app"]
