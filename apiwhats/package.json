@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "app.js",
   "license": "MIT",
+  "scripts": {
+    "start": "xvfb-run --server-args=\"-screen 0 1024x768x24\" node your-script.js"
+  },
   "dependencies": {
     "express": "^4.18.2",
     "express-validator": "^7.0.1",
